@@ -23,10 +23,10 @@ module "ec2" {
 module "alb" {
   source = "./modules/alb"
 
-  vpc_id             = module.vpc.vpc_id
-  public_subnet_ids  = module.vpc.public_subnet_ids
+  vpc_id             = module.network.vpc_id
+  public_subnet_ids  = module.network.public_subnet_ids
   alb_sg_id          = module.security.alb_sg_id
-  ec2_instance_id    = module.ec2.instance_id
+  ec2_instance_id    = module.ec2.ec2_id
 }
 
 output "vpc_id" {
