@@ -10,6 +10,6 @@ variable "alb_sg_id" {
   type = string
 }
 
-variable "ec2_instance_id" {
-  type = string
-}
+# variable "ec2_instance_id" {
+#   type = string
+# }

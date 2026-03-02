@@ -22,11 +22,12 @@ resource "aws_lb_target_group" "app_tg" {
   }
 }
 
-resource "aws_lb_target_group_attachment" "app_attachment" {
-  target_group_arn = aws_lb_target_group.app_tg.arn
-  target_id        = var.ec2_instance_id
-  port             = 80
-}
+# no need of this because of ASG attachment of ec2
+# resource "aws_lb_target_group_attachment" "app_attachment" {
+#   target_group_arn = aws_lb_target_group.app_tg.arn
+#   target_id        = var.ec2_instance_id
+#   port             = 80
+# }
 
 resource "aws_lb_listener" "app_listener" {
   load_balancer_arn = aws_lb.app_alb.arn
