@@ -42,6 +42,14 @@ module "asg" {
   
 }
 
+module "rds" {
+  source              = "./modules/rds"
+  vpc_id              = module.network.vpc_id
+  private_subnet_ids  = module.network.private_subnet_ids
+  db_sg_id            = module.security.rds_sg_id
+  db_password         = var.db_password
+}
+
 output "vpc_id" {
   value = module.network.vpc_id
 }
@@ -64,4 +72,8 @@ output "alb_dns_name" {
 
 output "target_group_arn" {
   value = module.alb.target_group_arn
+}
+
+output "rds_endpoint" {
+  value = module.rds.db_endpoint
 }
