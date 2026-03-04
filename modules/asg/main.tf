@@ -21,12 +21,21 @@ resource "aws_launch_template" "app_lt" {
 
   vpc_security_group_ids = [var.security_group_id]
 
+#   user_data = base64encode(<<-EOF
+# #!/bin/bash
+# yum install -y httpd
+# systemctl start httpd
+# systemctl enable httpd
+# echo "<h1>Employee App Running - $(hostname) </h1>" > /var/www/html/index.html
+# EOF
+#   )
+
   user_data = base64encode(<<-EOF
 #!/bin/bash
-yum install -y httpd
-systemctl start httpd
-systemctl enable httpd
-echo "<h1>Employee App Running - $(hostname) </h1>" > /var/www/html/index.html
+yum update -y
+yum install java-17-amazon-corretto -y
+mkdir -p /home/ec2-user/employee-app
+chown ec2-user:ec2-user /home/ec2-user/employee-app
 EOF
   )
 }
