@@ -12,13 +12,13 @@ resource "aws_lb" "app_alb" {
 
 resource "aws_lb_target_group" "app_tg" {
   name     = "employee-app-tg"
-  port     = 80
+  port     = 8081
   protocol = "HTTP"
   vpc_id   = var.vpc_id
 
   health_check {
     path = "/"
-    port = "80"
+    port = "8081"
   }
 }
 
