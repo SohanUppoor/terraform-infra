@@ -21,3 +21,11 @@ variable "security_group_id" {
 variable "key_name" {
   type = string
 }
+
+variable "artifact_bucket_name" {
+  type = string
+}
+
+variable "instance_profile_name" {
+  type = string
+}

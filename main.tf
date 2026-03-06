@@ -39,7 +39,8 @@ module "asg" {
   instance_type      = "t3.micro"
   security_group_id  = module.security.ec2_sg_id
   key_name           = "employeeapp-key"
-  
+  artifact_bucket_name = module.artifacts.artifact_bucket_name
+  instance_profile_name = module.iam.instance_profile_name
 }
 
 module "rds" {
@@ -48,6 +49,19 @@ module "rds" {
   private_subnet_ids  = module.network.private_subnet_ids
   db_sg_id            = module.security.rds_sg_id
   db_password         = var.db_password
+}
+
+module "artifacts" {
+  source      = "./modules/s3-artifacts"
+  bucket_name = "employeeapp-artifacts-${random_id.bucket_id.hex}"
+
+}
+module "iam" {
+  source = "./modules/iam"
+}
+
+resource "random_id" "bucket_id" {
+  byte_length = 4
 }
 
 output "vpc_id" {
@@ -77,3 +91,8 @@ output "target_group_arn" {
 output "rds_endpoint" {
   value = module.rds.db_endpoint
 }
+
+output "artifact_bucket_name" {
+  value = module.artifacts.artifact_bucket_name
+}
+
