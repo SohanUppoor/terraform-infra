@@ -20,7 +20,7 @@ resource "aws_launch_template" "app_lt" {
   key_name      = aws_key_pair.deployer.key_name
 
   vpc_security_group_ids = [var.security_group_id]
-  
+
   iam_instance_profile {
   name = var.instance_profile_name
   }
@@ -46,6 +46,11 @@ chown ec2-user:ec2-user /home/ec2-user/employee-app
 cd /home/ec2-user/employee-app
 
 aws s3 cp s3://${var.artifact_bucket_name}/builds/employeeapp.jar employeeapp.jar
+
+export DB_URL="${var.db_url}"
+export DB_USERNAME="${var.db_username}"
+export DB_PASSWORD="${var.db_password}"
+
 nohup java -jar employeeapp.jar > app.log 2>&1 &
 EOF
 )

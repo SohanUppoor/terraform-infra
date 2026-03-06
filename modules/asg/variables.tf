@@ -29,3 +29,19 @@ variable "artifact_bucket_name" {
 variable "instance_profile_name" {
   type = string
 }
+
+variable "db_url" {
+  description = "RDS database connection URL"
+  type        = string
+}
+
+variable "db_username" {
+  description = "Database username"
+  type        = string
+}
+
+variable "db_password" {
+  description = "Database password"
+  type        = string
+  sensitive   = true
+}
