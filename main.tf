@@ -41,7 +41,7 @@ module "asg" {
   key_name           = "employeeapp-key"
   artifact_bucket_name = module.artifacts.artifact_bucket_name
   instance_profile_name = module.iam.instance_profile_name
-  db_url      = "jdbc:mysql://${module.rds.db_endpoint}:3306/employeedb?createDatabaseIfNotExist=true"
+  db_url      = "${module.rds.db_endpoint}"
   db_username = "admin"
   db_password = var.db_password
 }
