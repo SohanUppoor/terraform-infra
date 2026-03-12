@@ -27,7 +27,7 @@ The infrastructure created includes:
 
 ### High Level Flow
 
-User → ALB → EC2 Instances (ASG) → RDS Database
+![Architecture](image.png)
 
 ---
 
